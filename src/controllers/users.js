@@ -178,6 +178,8 @@ export const logout =async (req, res, next) => {
   }
 }
 
+
+
 export const getAllUsers = async (req, res) => {
   try{ 
     const users = await Users.find()
@@ -218,7 +220,7 @@ export const getUserByQuery = async (req, res) => {
   try {
     const { term } = req.query;
 
-    const query = {};
+    const query = {}
 
     const searchTermType = getSearchTermType(term);
 
@@ -269,8 +271,8 @@ export const connections = async (req, res) => {
       });
     } else {
       // Connection doesn't exist, so add it
-      isConnectionPresent.connections.push(userId);
-      await isConnectionPresent.save();
+      isConnectionPresent.connections.push(userId)
+      await isConnectionPresent.save()
 
       res.status(200).json({
         status: true,

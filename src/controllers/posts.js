@@ -35,6 +35,8 @@ export const posting = async (req, res) => {
     const photoUrl = await cloudinary.uploader.upload(photo, {
       folder: "socioposts",
     })
+
+
     const userDetails = await Users.findById(user);
     if (!userDetails) {
       return res.status(404).json({
@@ -42,6 +44,8 @@ export const posting = async (req, res) => {
         message: "User not found"
       });
     }
+
+
     const data = {
       content,
       photo: {
@@ -116,7 +120,6 @@ export const posts = async (req, res) => {
 export const postsByQuery = async(req,res)=>{
   try {
   const { tags } = req.query
-  console.log(tags)
 
 
   const posts = await Posts.find({ tags: { $in: tags } }).populate("user");
@@ -169,7 +172,7 @@ export const postUpdate = async (req,res) => {
     } = req.params
 
 
-    const updatedPost = req.body;
+    const updatedPost = req.body
 
     if (updatedPost.photo !== "") {
       const post = await Posts.findById(postId)
@@ -243,11 +246,9 @@ export const removePost = async (req, res) => {
 
 
 
-
-
 // Add comment to a post
 export const addComment = async (req, res) => {
-  const { content, userId } = req.body;
+  const { content, userId } = req.body
   const { postId } = req.params
 
   try {
@@ -261,7 +262,7 @@ export const addComment = async (req, res) => {
       user: userId,
     };
 
-    post.comments.push(comment);
+    post.comments.push(comment)
     await post.save();
 
     res.status(201).json({ status : true, message: 'Comment added successfully', comment });
